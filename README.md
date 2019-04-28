@@ -1,7 +1,6 @@
 ## 井字棋AI的实现
 
-**开始时间: 2019/4/29**
+# begin from: 2019/4/29**
 
-'''
-printf("\n");
-'''
+# environment: Ubuntu 18.04 LTS
+			   GCC 7.3.0
