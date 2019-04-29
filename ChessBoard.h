@@ -1,22 +1,16 @@
-#include <stdio.h>
 #include <iostream>
+using namespace std;
 
 #define O -1   //代表落子"O",先手
 #define X 1    //代表落子"X",后手
 #define NONE 0 //代表此处无子
-int Round = 1; //回合数
-int Turn  = 0; //当前轮到谁落子 
-int ChessBoard[3][3]; //代表3x3的棋盘
+extern int Round; //回合数
+extern int Turn;  //当前轮到谁落子 
+extern int ChessBoard[3][3]; //代表3x3的棋盘
 
-void Run();    //走完一个回合，回合数加1
-int CheckResult();  //检测是否已连成5子
-int CheckLeftDown(int chess, int i, int j); //检测chess棋子在(i,j)处的左下方是否连成5子
-int CheckDown(int chess, int i, int j);     //正下方
-int CheckRightDown(int chess, int i, int j);//右下方
-int CheckRight(int chess, int i, int j);    //正右方
+void Run();         //走完一个回合，回合数加1
+int  CheckResult();  //检测是否已连成5子
+bool Check1(int i, int j); //检测在(i,j)处的棋子水平方向是否成3子
+bool Check2(int i, int j); //竖直方向
+bool Check3(int i, int j); //对角线方向
 
-void Run()
-{	
-	Round ++; //回合数加1
-	Turn  = 1 - Turn; //更换落子方
-}
