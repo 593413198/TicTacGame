@@ -9,7 +9,7 @@ int ChessBoard[3][3] = {{0,0,0},{0,0,0},{0,0,0}}; //棋盘初始状态，无子
 void Run()
 {	
 	Round ++; //回合数加1
-	Turn  = 1 - Turn; //更换落子方
+	Turn  = 0 - Turn; //更换落子方
 }
 
 bool check1(int i, int j)
@@ -55,3 +55,16 @@ int CheckResult()
 	return 0;
 }
 
+void show(){
+	//打印棋盘
+	for (int i=0; i<3; i++){
+		for (int j=0; j<3; j++){
+			int x = ChessBoard[i][j];
+			if (x==1) cout << "X ";
+			if (x==-1)cout << "O ";
+			if (x==0) cout << "  ";
+		}
+		cout << endl;
+	}
+	cout << endl;
+}

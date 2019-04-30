@@ -1,9 +1,11 @@
 #include "ChessBoard.h"
-// 产生每一步当前的所有合理走法；
-// 不用考虑走法的效益如何；
+extern int Mark[3][3];  //用于回溯法记录是否已走过
+extern int tmp_i,tmp_j; //记录每一步走法的落子位置
+extern int Depth; //全剧变量，搜索树深度
 
-int ChessBoard[15][15];
-int Turn;
-int Round;
+void InitMark(); //重置回溯的标记
 
-void GoStep(); 
+int GoStep(int Turn); //产生当前棋型的所有有效走法; 同时检测是否走满
+
+int Go(int depth); //递归产生所有的局面
+
