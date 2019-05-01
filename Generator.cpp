@@ -1,51 +1,33 @@
 #include "Generator.h"
-int tmp_i,tmp_j;
-int Mark[3][3] = {{0,0,0},{0,0,0},{0,0,0}};
-int Depth = 1;
-
-void InitMark(){
-	for (int i=0; i<3; i++)
-		for (int j=0; j<3; j++)
-			Mark[i][j] = 0;
-}
-
-int GoStep(int Turn){
-	/* 若chess=1，找到所有为0的位置，赋值1即可 
-	 * return 1: 走完一步
-	 * return 0: 棋盘已满 */
-	for (int i=0; i<3; i++){
-		for (int j=0; j<3; j++){
-			if (!ChessBoard[i][j] && Mark[i][j]!=Depth){ 
-				//避免重复回溯造成死循环
-				ChessBoard[i][j] =  Turn;
-				tmp_i = i;
-				tmp_j = j;
-				Mark[i][j] = Depth;
-				return 1;
-			}
-		}
-	}	
-	return 0;
-}
+int ans = 0; //所有局面数量
 
 int Go(int depth){
-	Depth = depth;
-	/* Go()调用一次，即进行一个回合 
+	cout << "Now: " << depth << endl;
+	/* 表示进行到第depth回合
 	 * depth%2=0: turn=-1 
 	 * depth%2=1: turn=1  */
-	//cout << "Now for: " << Turn << endl;
-	if (depth%2==1) Turn=-1;
-	else Turn=1;
-	if ( !GoStep(Turn) ) {//棋盘走满
-		cout << "++++" <<endl;
-		show();
-		int ans = CheckResult();
-		cout << "Winner is: " << ans << endl;
-		cout << "++++" <<endl;
-		return ans; //返回胜负情况
+	if (depth%2 == 0) Turn = -1; //确定当前轮到谁落子
+	else Turn = 1;
+	if (depth==9){
+		ans ++;
+		return 1; //9回合到，棋盘落满，游戏结束
 	}
-	show();
-	Go(depth+1);
-	ChessBoard[tmp_i][tmp_j] = 0; //回溯并且标记
-	Go(depth);
+	for (int i=0; i<3; i++){
+		for (int j=0; j<3; j++){
+			if (ChessBoard[i][j]==0){ //找到空位置就落子
+				ChessBoard[i][j] = Turn;
+			}
+			if (!CheckResult()) { //若未分出胜负，继续下一回合
+				Go(depth+1);
+			}
+			//已分出胜负，不必继续搜索，回溯
+			ChessBoard[i][j] = 0;
+		}
+	}	
 }
+
+int main(){
+	Go(0);
+	cout << ans << endl;
+}
+
