@@ -44,12 +44,14 @@ int CheckResult()
 	for (int i=0; i<3; i++){
 		for (int j=0; j<3; j++){
 			chess = ChessBoard[i][j];
-			ans  = check1(i,j);	
-			if (ans) return chess;
-			ans = check2(i,j);
-			if (ans) return chess;
-			ans = check3(i,j);
-			if (ans) return chess;
+			if (chess){
+				ans  = check1(i,j);	
+				if (ans) return chess;
+				ans = check2(i,j);
+				if (ans) return chess;
+				ans = check3(i,j);
+				if (ans) return chess;
+			}
 		}
 	}
 	return 0;
@@ -63,6 +65,17 @@ void show(){
 			if (x==1) cout << "X ";
 			if (x==-1)cout << "O ";
 			if (x==0) cout << "  ";
+		}
+		cout << endl;
+	}
+	cout << endl;
+}
+
+void show_raw(){
+	//打印原始的ChessBoard数组
+	for (int i=0; i<3; i++){
+		for (int j=0; j<3; j++){
+			cout << ChessBoard[i][j] << ' ';
 		}
 		cout << endl;
 	}

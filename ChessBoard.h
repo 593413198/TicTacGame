@@ -14,3 +14,4 @@ bool Check1(int i, int j); //检测在(i,j)处的棋子水平方向是否成3子
 bool Check2(int i, int j); //竖直方向
 bool Check3(int i, int j); //对角线方向
 void show(); //打印棋盘
+void show_raw(); //打印原始ChessBoard数组
