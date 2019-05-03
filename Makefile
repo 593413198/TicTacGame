@@ -1,5 +1,5 @@
 all:
 	reset
-	g++ ChessBoard.cpp Generator.cpp  -o test
+	g++ ChessBoard.cpp PlayGame.cpp  -o test
 	./test
 

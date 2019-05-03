@@ -1,5 +1,5 @@
 #include "ChessBoard.h"
-#include "Generator.h"
+#include "PlayGame.h"
 
 int main(){
 	//ChessBoard[0][0] = -1;

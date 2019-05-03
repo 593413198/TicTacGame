@@ -21,8 +21,14 @@ bool check2(int i, int j)
 
 bool check3(int i, int j)
 {
-	if (ChessBoard[(i+1)%3][(j+1)%3] + ChessBoard[(i+2)%3][(j+2)%3] == 2 * ChessBoard[i][j] ) 
-		return 1;
+	if (i==j){ 
+		if (ChessBoard[(i+1)%3][(j+1)%3] + ChessBoard[(i+2)%3][(j+2)%3] == 2 * ChessBoard[i][j] ) 
+			return 1;
+	}
+	if (i+j==2){
+		if (ChessBoard[(i+1)%3][(j-1)%3] + ChessBoard[(i+2)%3][(j-2)%3] == 2 * ChessBoard[i][j] ) 
+			return 1;
+	}
 	return 0;
 }
 
@@ -38,30 +44,23 @@ int CheckResult()
 			chess = ChessBoard[i][j];
 			if (chess){
 				ans  = check1(i,j);	
-				if (ans) return chess;
+				if (ans) {
+					return chess;
+				}
 				ans = check2(i,j);
-				if (ans) return chess;
+				if (ans) {
+					return chess;
+				}
 				ans = check3(i,j);
-				if (ans) return chess;
+				if (ans && (i==j||i+j==2)) {
+					return chess;
+				}
 			}
 		}
 	}
 	return 0;
 }
 
-void show(){
-	//打印棋盘
-	for (int i=0; i<3; i++){
-		for (int j=0; j<3; j++){
-			int x = ChessBoard[i][j];
-			if (x==1) cout << "X ";
-			if (x==-1)cout << "O ";
-			if (x==0) cout << "  ";
-		}
-		cout << endl;
-	}
-	cout << endl;
-}
 
 void ShowBoard(){
 	//打印出棋盘的图形化界面
