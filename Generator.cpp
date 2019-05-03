@@ -11,7 +11,7 @@ int Go(int depth){
 	if (depth==9){
 		ans ++;
 		times[1]++;
-		printf("ChessBoard Full!\n");
+		//printf("ChessBoard Full!\n");
 		return 1; //9回合到，棋盘落满，游戏结束
 	}
 	for (int i=0; i<3; i++){
@@ -26,9 +26,10 @@ int Go(int depth){
 				if (!winner) //若未分出胜负，继续下一回合
 					Go(depth+1);
 				else{ //已分出胜负，不必继续搜索，回溯
+					ShowBoard();
 					times[winner+1] ++;
 					ans ++;
-					printf("%c winner!\n",who[winner+1]);
+					//printf("%c winner!\n",who[winner+1]);
 					ChessBoard[i][j] = 0;
 					return 0;
 				}

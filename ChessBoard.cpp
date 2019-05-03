@@ -1,16 +1,8 @@
 #include "ChessBoard.h"
-
 int Round = 0; //第0回合-未开始
 int Turn = -1; //"O"先落子
 int ChessBoard[3][3] = {{0,0,0},{0,0,0},{0,0,0}}; //棋盘初始状态，无子
-
-
-/* TODO 函数的实现  */
-void Run()
-{	
-	Round ++; //回合数加1
-	Turn  = 0 - Turn; //更换落子方
-}
+char Graph[3][3]; //图形界面
 
 bool check1(int i, int j)
 {	/* return 1: 水平方向连成三子
@@ -71,13 +63,20 @@ void show(){
 	cout << endl;
 }
 
-void show_raw(){
-	//打印原始的ChessBoard数组
+void ShowBoard(){
+	//打印出棋盘的图形化界面
 	for (int i=0; i<3; i++){
 		for (int j=0; j<3; j++){
-			cout << ChessBoard[i][j] << ' ';
+			if (ChessBoard[i][j]==0) Graph[i][j] = ' ';
+			else if (ChessBoard[i][j]==-1) Graph[i][j] = 'O';
+			else Graph[i][j] = 'X';
 		}
-		cout << endl;
 	}
-	cout << endl;
+	cout << "+---+---+---+" << endl;
+	cout << "| " << Graph[0][0] << " | " << Graph[0][1] << " | " << Graph[0][2] << " |" << endl;
+	cout << "|---|---|---|" << endl;
+	cout << "| " << Graph[1][0] << " | " << Graph[1][1] << " | " << Graph[1][2] << " |" << endl;
+	cout << "|---|---|---|" << endl;
+	cout << "| " << Graph[2][0] << " | " << Graph[2][1] << " | " << Graph[2][2] << " |" << endl;
+	cout << "+---+---+---+" << endl;
 }
