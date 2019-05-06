@@ -42,7 +42,7 @@ Go(depth){
 	if (depth==9)
 		return;
 	do 找到空位置(i,j)并落子;
-	if (胜负已分)
+	if (胜负未分)
 		Go(depth+1);
 	do 将(i,j)上的落子还原;
 }
@@ -65,6 +65,11 @@ int WhoTurn;  //当前落子方
 bool CanWin;  //落子方能否赢
 int Sum();    //返回输入局面的落子数，即回合数
 bool Input(); //输入一个局面，判断当前落子方是否有赢的可能
-
 ```
 
+**1.4 赋予一些初步智能：如遇二子必堵**
+```c
+#include "ChessBoard.h"
+int Check4(); //检测对手是否出现二子
+
+```

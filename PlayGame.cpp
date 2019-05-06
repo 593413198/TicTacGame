@@ -11,11 +11,15 @@ int Go(int depth){
 	/* 表示进行到第depth回合
 	 * depth%2=0: turn=-1 
 	 * depth%2=1: turn=1  */
+	Turn = (depth%2==0) ? -1:1;
 	if (depth==9){
 		//ans ++;
 		//times[1]++;
 		return 1; //9回合到，棋盘落满，游戏结束
 	}
+	/* TODO 赋予初步智能：堵危险二子 */
+	
+
 	for (int i=0; i<3; i++){
 		for (int j=0; j<3; j++){
 			if (ChessBoard[i][j]==0){ //找到空位置就落子
@@ -30,8 +34,8 @@ int Go(int depth){
 					//times[winner+1] ++;
 					//ans ++;
 					if (winner == WhoTurn){
-						cout << "其中一个获胜局面是:"<<endl;
-						ShowBoard();
+						//cout << "其中一个获胜局面是:"<<endl;
+						//ShowBoard();
 						CanWin = true;
 						return 0;
 					}
@@ -65,7 +69,9 @@ bool Input(){
 	cout << "当前轮到" << Name[WhoTurn+1] << "落子" << endl;
 	/* 回溯，寻找有没有'O'获胜的子节点 */
 	CanWin = false;
-	Go(NowTurn);	
+	//Go(NowTurn);	
+	Turn = WhoTurn;
+	cout << Check4() << endl;
 	return 1;
 }
 
@@ -74,10 +80,13 @@ int main(){
 		for (int j=0; j<3; j++)
 			ChessBoard[i][j] = 0;
 	Input();
+	
+	/*
 	if (CanWin)
 	   cout << "此人可以赢" <<endl;
 	else
 		cout << "此人不可能赢" <<endl;	
+	*/
 	return 1;
 }
 
