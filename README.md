@@ -21,15 +21,17 @@
 ## 思路分析：
 **1.0 代码架构（已实现部分）**
 ```c
-ChessBoard.h    /* 棋子、棋盘的定义、存储
-ChessBoard.cpp   * 检查是否分出胜负
-	             * 可视化打印棋盘 */
+#ChessBoard.h  
+ChessBoard.cpp
+//棋盘的存储、判定输赢、可视化打印、局面评估函数
 
-PlayGame.h      /* 回溯遍历所有情形
-PlayGame.cpp     *                */
+#PlayGame.h  
+PlayGame.cpp
+//模拟对弈、遍历回溯所有局面
 
-test.cpp        /* 测试主函数  */
-Makefile        /* make编译    */
+example.c  /* 输入棋盘的测试数据 */
+result.c   /* 输出可视化结果     */
+Makefile   /* make编译           */
 ```
 
 **1.1 先回溯遍历所有情形，摸个底**
