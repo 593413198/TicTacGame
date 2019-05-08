@@ -12,6 +12,7 @@ int Go(int depth){
 	 * depth%2=0: turn=-1 
 	 * depth%2=1: turn=1  */
 	ShowBoard();
+	ShowValue();
 	int winner = CheckResult();
 	Turn = (depth%2==0) ? -1:1;
 	if (depth==9 || winner){
@@ -83,19 +84,15 @@ bool Input(){
 }
 
 int main(){
-	/*
-	for (int i=0; i<3; i++)
-		for (int j=0; j<3; j++)
-			ChessBoard[i][j] = 0; 
-	*/
-	//Input();
 	for (int i=0; i<3; i++)
 		for (int j=0; j<3; j++)
 			cin >> ChessBoard[i][j];
 	NowTurn = Sum(); //回合数
 	Turn = (NowTurn%2==0)?-1:1; //轮到谁落子 	
 	cout << "轮到落子:" << Name[Turn+1] << endl;
-	Go(NowTurn);
+	Evaluate();
+	ShowValue();
+	//Go(NowTurn);
 	return 1;
 }
 
