@@ -20,7 +20,6 @@ int Check4(); //检测是否出现2子; 优先返回己方2子
 int CheckX(int i, int j); //左上到右下
 int CheckY(int i, int j); //左下到右上
 
-
 void Evaluate(); //点位价值评估函数
 
 void ShowBoard(); //打印图形界面

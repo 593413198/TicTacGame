@@ -8,7 +8,8 @@ int Value[3][3] ={{0,0,0},{0,0,0},{0,0,0}};
 
 
 int Check1(int i, int j)
-{	/* return 4: 己方1子，且无对方子
+{	/* return 5: 对方1子，且无己方子
+	   return 4: 己方1子，且无对方子
 	   return 3: 己方2子(必填)
 	   return 2: 对方2子（必堵）
 	   return 1: 出现3子
@@ -19,6 +20,7 @@ int Check1(int i, int j)
 	if (x==0 && sum == 2*Turn) return 3;
 	if (x==0 && sum == -2*Turn) return 2;
 	if (x==0 && sum == Turn) return 4;
+	if (x==0 && sum == -Turn) return 5;
 	return 0;
 }
 
@@ -30,6 +32,7 @@ int Check2(int i, int j)
 	if (x==0 && sum == 2*Turn) return 3;
 	if (x==0 && sum == -2*Turn) return 2;
 	if (x==0 && sum == Turn) return 4;
+	if (x==0 && sum == -Turn) return 5;
 	return 0;
 }
 
@@ -62,16 +65,19 @@ int Check3(int i, int j)
 	int sum2=ChessBoard[(i+1)%3][(j+2)%3]+ChessBoard[(i+2)%3][(j+1)%3]; 
 	int x = ChessBoard[i][j];
 	if (i==j){ 
-		if (sum1 == 2 * x) return 1;
 		if (x==0 && sum1 == 2*Turn)  return 3;
 		if (x==0 && sum1 == -2*Turn) return 2;
 		if (x==0 && sum1 == Turn) return 4;
+		if (x==0 && sum1 == -Turn) return 5;
+		if (sum1 == 2 * x)
+			return 1;
 	}
 	if (i+j==2){
-		if (sum2 == 2 * x) return 1;
 		if (x==0 && sum2 == 2*Turn)  return 3;
 		if (x==0 && sum2 == -2*Turn) return 2;
 		if (x==0 && sum2 == Turn) return 4;
+		if (x==0 && sum2 == -Turn) return 5;
+		if (sum2 == 2 * x) return 1;
 	}
 	return 0;
 }
@@ -152,13 +158,16 @@ void Evaluate()
 				Value[i][j]+=3;
 			//评估规则2：每有一个己方棋子同线，且无对方障碍棋子，点位价值再+1
 			if (Check1(i,j)==4)
-				Value[i][j]++;
+				Value[i][j]+=2;
 			if (Check2(i,j)==4)
-				Value[i][j]++;
+				Value[i][j]+=2;
 			if (i==j && CheckX(i,j)==4)
-				Value[i][j]++;
+				Value[i][j]+=2;
 			if (i+j==2 && CheckY(i,j)==4)
-				Value[i][j]++;
+				Value[i][j]+=2;
+			if (Check1(i,j)==5 && Check2(i,j)==5){
+				Value[i][j]--;
+			}
 		}
 	}
 }
